@@ -6,7 +6,7 @@ This repository contains the source code for my personal website hosted at [tris
 
 ## About
 
-This is a GitHub Pages site showcasing my work and projects.
+This is a GitHub Pages site showcasing my work, projects, and opportunities to collaborate.
 
 ## Getting Started
 
