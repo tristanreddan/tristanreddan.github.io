@@ -8,9 +8,9 @@ This site is a professional record with links to primary sources where they exis
 - [Home](https://tristanreddan.github.io/): profile links, upcoming talks, and contact
 - [Research](https://tristanreddan.github.io/research.html): research themes and a case study on inter-hospital transfers of children with abdominal pain
 - [Teaching and academia](https://tristanreddan.github.io/teaching.html): teaching, academic work, and eight papers led by first-time and early-career authors
-- [Regional education](https://tristanreddan.github.io/regional.html): regional and rural paediatric ultrasound workshops since 2016, with a table of local workforce and ABS 2021 Census context
-- [Presentations](https://tristanreddan.github.io/presentations.html): upcoming and past talks, keynotes and conference presentations
-- [Recognition and service](https://tristanreddan.github.io/recognition.html): awards, grants, editorial and professional service
+- [Sonographer education](https://tristanreddan.github.io/education.html): paediatric ultrasound workshops, webinars and lectures for sonographers, including regional and rural sites since 2016, with a table of local workforce and ABS 2021 Census context
+- [Conference presentations](https://tristanreddan.github.io/presentations.html): upcoming and past conference talks, keynotes and posters
+- [Recognition and service](https://tristanreddan.github.io/recognition.html): awards, grants, editorial roles (Journal of Medical Radiation Sciences, Sonography, BMC Pediatrics) and professional service
 
 ## Profiles
 - [ORCID](https://orcid.org/0000-0003-1843-1602)
