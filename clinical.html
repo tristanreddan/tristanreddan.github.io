@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tristan Reddan, Clinical Associate Professor, sonographer and radiographer. Paediatric ultrasound research, regional education, and links to publications and profiles.">
+<meta name="theme-color" content="#080c0f">
+<link rel="canonical" href="https://tristanreddan.com/">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tristan Reddan, PhD | Paediatric Sonographer and Researcher</title>
+<link rel="icon" type="image/png" href="clinical-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a dark-room scanner console as an alternative front door.
+   Left: simulated scan, soft keys, five probes. Right: intro and five tiles that link to the sub-pages.
+   A probe selects a tile and previews its page; the Open key (or the tile) goes there. */
+:root{
+  --bg:#080c0f;
+  --bezel:#12191d;
+  --screen:#04070a;
+  --ink:#d3e3df;
+  --ink-dim:#8da39f;
+  --line:#243230;
+  --teal:#59c9bd;
+  --lilac:#b6a4ea;
+  --amber:#e3b95b;
+  --key:#192226;
+  --f-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --f-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 36px}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+button{font:inherit;color:inherit}
+
+.viewbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.mark{font:600 20px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.mark svg{width:22px;height:22px;flex:none}
+.viewbtn{display:inline-block;background:var(--key);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font:500 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.viewbtn:hover{border-color:var(--teal)}
+
+.machine{background:var(--bezel);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:12px}
+.banner{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;justify-content:space-between;background:var(--screen);border:1px solid var(--line);border-radius:8px;padding:9px 14px}
+.fld{display:flex;flex-direction:column;min-width:0}
+.fld small{font:400 10px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+.fld b{font:600 17px/1.25 var(--f-display);letter-spacing:.05em;text-transform:uppercase}
+.fld .mono{font:500 13px/1.4 var(--f-mono);letter-spacing:.02em}
+
+.body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;align-items:start}
+.left{display:grid;gap:10px;min-width:0}
+.scan{position:relative;aspect-ratio:4/3;background:var(--screen);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.scan canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair;touch-action:manipulation}
+.ov{position:absolute;pointer-events:none;font:500 11px/1.3 var(--f-mono);color:var(--ink);letter-spacing:.04em}
+.ov.tl{top:10px;left:60px;display:flex;flex-direction:column;gap:2px}
+.ov.tl b{font:600 15px/1.1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.ov.tl span{color:var(--ink-dim)}
+.ov.tr{top:10px;right:14px;text-align:right;color:var(--ink-dim)}
+.ov.br{bottom:10px;right:14px;color:var(--amber)}
+.badge{display:none;color:var(--amber);letter-spacing:.14em}
+.frozen .badge{display:block}
+
+.keys{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.key{display:flex;flex-direction:column;gap:3px;justify-content:center;background:var(--key);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;min-height:44px;text-align:left;text-decoration:none;color:var(--ink)}
+.key span,.key label{font:500 10px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.key i{font:500 12px/1.2 var(--f-mono);font-style:normal;color:var(--ink)}
+.key:hover{border-color:var(--teal)}
+.key[aria-pressed="true"]{border-color:var(--amber)}
+.key[aria-pressed="true"] i{color:var(--amber)}
+.key.gain,.key.depth{cursor:default}
+.key.gain input{width:96px;accent-color:var(--teal);margin:0}
+.dctl{display:flex;align-items:center;gap:8px}
+.dctl button{width:26px;height:24px;border:1px solid var(--line);background:var(--bezel);border-radius:4px;cursor:pointer;line-height:1}
+.dctl button:hover{border-color:var(--teal)}
+.dctl output{font:500 12px/1 var(--f-mono);min-width:44px;text-align:center}
+.key.open{border-color:var(--teal)}
+.key.open i{color:var(--teal)}
+.key.open[aria-disabled="true"]{border-color:var(--line);cursor:default}
+.key.open[aria-disabled="true"] i{color:var(--ink-dim)}
+
+.probes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.probe{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 3px 8px;background:var(--screen);border:1px solid var(--line);border-radius:8px;color:var(--ink-dim);cursor:pointer;position:relative}
+.probe svg{width:30px;height:56px;fill:currentColor}
+.probe .nm{font:600 12px/1.1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+.probe .pn{font:400 10px/1.2 var(--f-mono);text-align:center;overflow-wrap:anywhere}
+.probe:hover{color:var(--ink);border-color:var(--ink-dim)}
+.probe[aria-current="true"]{color:var(--teal);border-color:var(--teal)}
+.probe[aria-current="true"]::after{content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.hintline{font:400 11px/1.5 var(--f-mono);color:var(--ink-dim)}
+
+.report{background:var(--screen);border:1px solid var(--line);border-radius:8px;padding:20px 22px;max-height:700px;overflow:auto;min-width:0}
+.preset{font:400 11px/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--lilac);margin:0 0 6px}
+h1{font:600 clamp(34px,5vw,46px)/1.02 var(--f-display);letter-spacing:.01em;margin:0 0 10px;text-wrap:balance}
+h3{font:500 11px/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin:22px 0 8px}
+p{margin:0 0 12px;max-width:62ch}
+.lead{font-size:17px;line-height:1.55}
+ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ul.plain li{max-width:64ch}
+.dim{color:var(--ink-dim)}
+.links{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 13px/1.5 var(--f-mono)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.tile{display:block;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--ink);text-decoration:none}
+.tile b{display:block;font:600 17px/1.2 var(--f-display);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.tile p{margin:0 0 8px;font-size:14px;color:var(--ink-dim)}
+.tile .pr{font:400 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lilac)}
+.tile:hover{border-color:var(--ink-dim)}
+.tile.is-sel{border-color:var(--teal)}
+.tile:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+
+.foot{margin-top:18px;font-size:13px;color:var(--ink-dim);max-width:78ch}
+.foot p{max-width:none}
+
+@media (max-width:860px){
+  .body{grid-template-columns:minmax(0,1fr)}
+  .report{max-height:none;overflow:visible;padding:18px 16px}
+  .scan{aspect-ratio:16/10}
+  .machine{padding:10px}
+  .banner .opt{display:none}
+}
+@media (max-width:420px){
+  .probe .nm{font-size:11px;letter-spacing:.04em}
+  .probe svg{width:26px;height:48px}
+  .key.gain input{width:80px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="viewbar">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8 L17 17 H7 Z" fill="var(--lilac)" opacity=".7"/></svg>
+      Tristan Reddan, PhD
+    </div>
+    <a class="viewbtn" href="index.html">Professional view</a>
+  </div>
+
+  <div class="machine">
+    <div class="banner">
+      <div class="fld"><small>Name</small><b>Reddan, Tristan PhD</b></div>
+      <div class="fld opt"><small>Practice</small><span class="mono">Sonographer, radiographer, researcher</span></div>
+      <div class="fld"><small>Preset</small><b id="exam">Overview</b></div>
+      <div class="fld"><small>Date</small><span class="mono" id="clock"></span></div>
+    </div>
+
+    <div class="body">
+      <div class="left">
+        <div class="scan" id="scan">
+          <canvas id="cv" aria-hidden="true"></canvas>
+          <div class="ov tl"><b id="ovName">Overview</b><span id="ovProbe"></span></div>
+          <div class="ov tr"><div id="ovG">G 60 &nbsp; D 10 cm</div><div class="badge">FROZEN</div></div>
+          <div class="ov br" id="ovMeas"></div>
+        </div>
+
+        <div class="keys" role="group" aria-label="Soft keys">
+          <button class="key" id="kFreeze" type="button" aria-pressed="false"><span>Freeze</span><i>F</i></button>
+          <div class="key gain"><label for="kGain">Gain</label><input id="kGain" type="range" min="20" max="100" value="60"></div>
+          <div class="key depth"><span>Depth</span><div class="dctl"><button id="dMinus" type="button" aria-label="Decrease depth">-</button><output id="dVal">10 cm</output><button id="dPlus" type="button" aria-label="Increase depth">+</button></div></div>
+          <button class="key" id="kImage" type="button"><span>Image</span><i>Next</i></button>
+          <button class="key" id="kClear" type="button"><span>Calipers</span><i>Clear</i></button>
+          <a class="key open" id="kOpen" aria-disabled="true"><span>Open page</span><i id="kOpenV">Select a probe</i></a>
+        </div>
+
+        <nav aria-label="Probes">
+          <div class="probes" id="probes"></div>
+        </nav>
+        <div class="hintline">Select a probe to preview its page, then press Open page. Keys: 1 to 5 probes, O open, I image, F freeze, H home.</div>
+      </div>
+
+      <div class="report">
+        <p class="preset">Overview</p>
+        <h1>Tristan Reddan, PhD</h1>
+        <p class="lead">Sonographer and radiographer working in paediatric medical imaging, with research, teaching and voluntary education for sonographers.</p>
+        <p>This site collects my research, teaching, conference presentations, voluntary education sessions and professional service. Where a primary source exists online, it is linked. Many older events have left no digital trace, and those entries say so.</p>
+
+        <h3>Pages</h3>
+        <div class="tiles" id="tiles">
+          <a class="tile" href="research.html" data-id="research" data-name="Research" data-short="Research" data-probe="bigcurve"><b>Research</b><p>Paediatric ultrasound and how sonography is practised.</p><span class="pr">Big curve</span></a>
+          <a class="tile" href="teaching.html" data-id="teaching" data-name="Teaching and academia" data-short="Teaching" data-probe="linear"><b>Teaching and academia</b><p>Graduate teaching, supervision and mentoring of first-time authors.</p><span class="pr">Linear</span></a>
+          <a class="tile" href="education.html" data-id="education" data-name="Sonographer education" data-short="Education" data-probe="sector"><b>Sonographer education</b><p>Voluntary sessions for sonographers across Queensland and online.</p><span class="pr">Sector</span></a>
+          <a class="tile" href="presentations.html" data-id="presentations" data-name="Conference presentations" data-short="Talks" data-probe="micro"><b>Conference presentations</b><p>Keynotes, posters and talks, with programme links where they survive.</p><span class="pr">Micro curve</span></a>
+          <a class="tile" href="recognition.html" data-id="recognition" data-name="Recognition and service" data-short="Service" data-probe="hockey"><b>Recognition and service</b><p>Awards, professional service and editorial roles.</p><span class="pr">Hockey stick</span></a>
+        </div>
+
+        <h3>Editorial roles</h3>
+        <ul class="plain">
+          <li><b>Associate Editor</b>, Journal of Medical Radiation Sciences, 2021 to present</li>
+          <li><b>Editorial Review Board</b>, Sonography, 2017 to present</li>
+          <li><b>Editorial Review Board</b>, BMC Pediatrics, from 2026</li>
+        </ul>
+
+        <h3>Find me</h3>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/tristanreddan">LinkedIn</a>
+          <a href="https://orcid.org/0000-0003-1843-1602">ORCID</a>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Reddan+T&amp;cauthor_id=42888076">PubMed</a>
+          <a href="https://scholar.google.com/citations?user=P6ZDJagAAAAJ">Google Scholar</a>
+          <span class="dim">Bluesky @tristanreddan-phd</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p>I live and work on the lands of the Turrbal and Jagera peoples of Meanjin (Brisbane), and acknowledge their continuing custodianship of Country. I pay my respects to Elders past, present, and emerging, and recognise the deep connection of Aboriginal and Torres Strait Islander peoples to land, waters, and community across Queensland and beyond.</p>
+    <p>The scan image is a simulation, not a clinical image.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=false;
+  try{reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+
+  var CABLE='<path d="M20 66 Q20 74 28 78" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>';
+  var PROBES={
+    bigcurve:{name:'Big curve',code:'2 to 5 MHz',
+      icon:'<svg viewBox="0 0 40 80" aria-hidden="true"><path d="M2 24 Q20 0 38 24 L31 31 H9 Z"/><rect x="14" y="29" width="12" height="37" rx="5"/>'+CABLE+'</svg>',
+      shape:{k:'sector',apex:-0.32,outer:1.32,half:0.5}},
+    micro:{name:'Micro curve',code:'4 to 8 MHz',
+      icon:'<svg viewBox="0 0 40 80" aria-hidden="true"><path d="M11 22 Q20 10 29 22 L26 29 H14 Z"/><rect x="15" y="27" width="10" height="39" rx="5"/>'+CABLE+'</svg>',
+      shape:{k:'sector',apex:-0.08,outer:1.08,half:0.62}},
+    sector:{name:'Sector',code:'2 to 4 MHz',
+      icon:'<svg viewBox="0 0 40 80" aria-hidden="true"><rect x="11" y="8" width="18" height="18" rx="3"/><rect x="14" y="24" width="12" height="42" rx="5"/>'+CABLE+'</svg>',
+      shape:{k:'sector',apex:0,outer:1.0,half:0.72}},
+    linear:{name:'Linear',code:'5 to 12 MHz',
+      icon:'<svg viewBox="0 0 40 80" aria-hidden="true"><rect x="4" y="8" width="32" height="18" rx="2"/><rect x="14" y="24" width="12" height="42" rx="5"/><path d="M20 66 Q20 74 12 78" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+      shape:{k:'rect',hw:0.94}},
+    hockey:{name:'Hockey stick',code:'8 to 15 MHz',
+      icon:'<svg viewBox="0 0 40 80" aria-hidden="true"><path d="M6 10 H30 Q35 10 35 15 V24 H12 Q6 24 6 18 Z"/><rect x="18" y="22" width="12" height="44" rx="5"/><path d="M24 66 Q24 74 16 78" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+      shape:{k:'rect',hw:0.42}}
+  };
+
+  /* Simulated scenes. Coordinates: x across, y down, in units where 1.0 of depth is 10 cm. */
+  var SC=[
+    {name:'Bladder',st:[{t:'c',x:0,y:0.48,rx:0.22,ry:0.15},{t:'b',y:0.66,th:0.008,a:2.2,x:0,w:0.24},{t:'b',y:0.2,th:0.01,a:1.8}]},
+    {name:'Gallbladder',st:[{t:'c',x:-0.03,y:0.42,rx:0.12,ry:0.07},{t:'e',x:0,y:0.47,rx:0.018,ry:0.012,m:5},{t:'s',x:0,y:0.48,w:0.03}]},
+    {name:'Kidney and liver',st:[{t:'e',x:0,y:0.5,rx:0.19,ry:0.12,m:0.5},{t:'e',x:0,y:0.5,rx:0.09,ry:0.05,m:6},{t:'e',x:-0.09,y:0.45,rx:0.025,ry:0.02,m:0.3},{t:'e',x:0.09,y:0.45,rx:0.025,ry:0.02,m:0.3},{t:'b',y:0.88,th:0.012,a:2.4}]},
+    {name:'Carotid and jugular',st:[{t:'e',x:0,y:0.55,rx:0.28,ry:0.09,m:1.35},{t:'e',x:-0.07,y:0.3,rx:0.064,ry:0.064,m:2.2},{t:'c',x:-0.07,y:0.3,rx:0.05,ry:0.05},{t:'c',x:0.12,y:0.3,rx:0.075,ry:0.052},{t:'b',y:0.16,th:0.01,a:1.9}]},
+    {name:'Heart, four chamber',st:[{t:'c',x:-0.09,y:0.42,rx:0.065,ry:0.15},{t:'c',x:0.1,y:0.43,rx:0.055,ry:0.14},{t:'c',x:-0.09,y:0.7,rx:0.065,ry:0.06},{t:'c',x:0.1,y:0.7,rx:0.06,ry:0.06},{t:'v',x:0,th:0.012,y0:0.28,y1:0.58,a:2.4},{t:'b',y:0.62,th:0.01,a:2.0,x:0,w:0.2}]},
+    {name:'Bowel, short axis',st:[{t:'e',x:-0.05,y:0.45,rx:0.1,ry:0.09,m:0.35},{t:'e',x:-0.05,y:0.45,rx:0.06,ry:0.05,m:5},{t:'e',x:0.16,y:0.58,rx:0.05,ry:0.04,m:0.4},{t:'b',y:0.2,th:0.01,a:1.8,x:0,w:0.3}]}
+  ];
+
+  var tiles=$$('.tile');
+  var items=tiles.map(function(t){return {id:t.dataset.id,name:t.dataset.name,short:t.dataset.short,probe:t.dataset.probe,href:t.getAttribute('href'),el:t}});
+
+  var state={page:null,probe:'bigcurve',scene:Math.floor(Math.random()*SC.length),depth:10,gain:60,frozen:reduce,phase:0,reveal:1,pts:[]};
+  var cv=$('#cv'),ctx=cv.getContext('2d');
+  var off=document.createElement('canvas'),octx=off.getContext('2d');
+  var ML=40,MT=12,MR=12,MB=12,W=300,H=225,dpr=1,gw=170,gh=128,ar=1.33,img=null,S=null,F=[];
+  var dirty=true,last=0,rs=0;
+
+  /* probe rail, built from the tiles so the page list lives in one place */
+  var rail=$('#probes');
+  items.forEach(function(it,i){
+    var P=PROBES[it.probe];
+    var b=document.createElement('button');
+    b.type='button';b.className='probe';b.dataset.id=it.id;
+    b.setAttribute('aria-label',P.name+' probe: '+it.name+' ('+(i+1)+')');
+    b.innerHTML=P.icon+'<span class="nm">'+it.short+'</span><span class="pn">'+P.name+'</span>';
+    b.addEventListener('click',function(){select(it.id)});
+    rail.appendChild(b);
+  });
+
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function genNoise(){var r=rng(7);F=[0,1,2].map(function(){var a=new Float32Array(gw*gh);for(var i=0;i<a.length;i++)a[i]=r();return a})}
+  function sm(a,b,x){var t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)}
+
+  function buildS(){
+    var D=state.depth,sc=D/10,sh=PROBES[state.probe].shape,st=SC[state.scene].st;
+    S=new Float32Array(gw*gh);
+    for(var j=0;j<gh;j++){
+      for(var i=0;i<gw;i++){
+        var x=((i+0.5)/gw-0.5)*ar,v=(j+0.5)/gh,inside;
+        if(sh.k==='sector'){
+          var dy=v-sh.apex,r=Math.hypot(x,dy),a=Math.atan2(Math.abs(x),dy);
+          inside=a<sh.half&&r<sh.outer&&r>=-sh.apex;
+        }else{inside=Math.abs(x)<sh.hw*ar/2}
+        var k=j*gw+i;
+        if(!inside||v>0.985){S[k]=-1;continue}
+        var f=Math.exp(-0.9*v),xs=x*sc,vs=v*sc;
+        for(var q=0;q<st.length;q++){
+          var o=st[q];
+          if(o.t==='c'||o.t==='e'){
+            var e=Math.pow((xs-o.x)/o.rx,2)+Math.pow((vs-o.y)/o.ry,2);
+            var m=o.t==='c'?0.05:o.m;
+            f*=1+(m-1)*(1-sm(0.8,1.2,e));
+            if(o.t==='c'&&Math.abs(xs-o.x)<o.rx&&vs>o.y+o.ry)f*=1.3;
+          }else if(o.t==='b'){
+            if(o.w===undefined||Math.abs(xs-o.x)<o.w)f*=1+(o.a-1)*Math.exp(-Math.pow((vs-o.y)/o.th,2));
+          }else if(o.t==='v'){
+            if(vs>o.y0&&vs<o.y1)f*=1+(o.a-1)*Math.exp(-Math.pow((xs-o.x)/o.th,2));
+          }else if(o.t==='s'){
+            if(vs>o.y){var sw=1-sm(o.w*0.8,o.w*1.3,Math.abs(xs-o.x));f*=1-0.85*sw*sm(o.y,o.y+0.03,vs)}
+          }
+        }
+        S[k]=f;
+      }
+    }
+  }
+
+  function renderBuf(){
+    var d=img.data,gainF=0.5+state.gain/100;
+    var p0=Math.floor(state.phase),A=F[p0%3],B=F[(p0+1)%3];
+    var th=(state.phase-p0)*Math.PI/2,c=Math.cos(th),s=Math.sin(th);
+    var rows=state.reveal*gh;
+    for(var j=0;j<gh;j++){
+      for(var i=0;i<gw;i++){
+        var k=j*gw+i,o=k*4,sv=S[k];
+        if(sv<0||j>rows){d[o]=4;d[o+1]=7;d[o+2]=10;d[o+3]=255;continue}
+        var n=(A[k]-0.5)*c+(B[k]-0.5)*s+0.5;
+        n=n<0?0:(n>1?1:n);
+        var val=sv*(0.1+0.9*Math.pow(n,1.7))*gainF*1.25;
+        var g=Math.min(255,val*255);
+        d[o]=g*0.9;d[o+1]=g*0.97;d[o+2]=g;d[o+3]=255;
+      }
+    }
+    octx.putImageData(img,0,0);
+  }
+
+  function draw(){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle='#04070a';ctx.fillRect(0,0,W,H);
+    var iw=W-ML-MR,ih=H-MT-MB;
+    ctx.imageSmoothingEnabled=true;
+    ctx.drawImage(off,ML,MT,iw,ih);
+    var pxcm=ih/state.depth;
+    ctx.strokeStyle='#7f9692';ctx.fillStyle='#8da39f';ctx.lineWidth=1;
+    ctx.font='10px "IBM Plex Mono", monospace';ctx.textAlign='right';ctx.textBaseline='middle';
+    for(var c=0;c<=state.depth;c++){
+      var y=Math.round(MT+c*pxcm)+0.5,major=c%2===0;
+      ctx.beginPath();ctx.moveTo(ML-4,y);ctx.lineTo(ML-(major?12:8),y);ctx.stroke();
+      if(major&&c>0)ctx.fillText(String(c),ML-15,y);
+    }
+    var fy=MT+ih*0.4;
+    ctx.fillStyle='#59c9bd';ctx.beginPath();ctx.moveTo(W-MR-2,fy);ctx.lineTo(W-MR-10,fy-5);ctx.lineTo(W-MR-10,fy+5);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#b6a4ea';ctx.beginPath();ctx.arc(ML+8,MT+8,3.5,0,Math.PI*2);ctx.fill();
+    var P=state.pts;
+    ctx.strokeStyle='#e3b95b';ctx.fillStyle='#e3b95b';ctx.lineWidth=1.25;
+    P.forEach(function(p){
+      ctx.beginPath();ctx.moveTo(p.x-6,p.y-6);ctx.lineTo(p.x+6,p.y+6);ctx.moveTo(p.x+6,p.y-6);ctx.lineTo(p.x-6,p.y+6);ctx.stroke();
+    });
+    if(P.length===2){
+      ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(P[0].x,P[0].y);ctx.lineTo(P[1].x,P[1].y);ctx.stroke();ctx.setLineDash([]);
+      var mm=Math.hypot(P[1].x-P[0].x,P[1].y-P[0].y)/pxcm*10;
+      ctx.font='11px "IBM Plex Mono", monospace';ctx.textAlign='left';ctx.textBaseline='bottom';
+      var mx=(P[0].x+P[1].x)/2+8,my=(P[0].y+P[1].y)/2-4;
+      ctx.fillText('D '+mm.toFixed(1)+' mm',Math.min(mx,W-MR-80),Math.max(my,MT+14));
+    }
+  }
+
+  function readout(){
+    $('#ovG').innerHTML='G '+state.gain+' &nbsp; D '+state.depth+' cm';
+    $('#dVal').textContent=state.depth+' cm';
+    $('#scan').classList.toggle('frozen',state.frozen);
+    var P=state.pts,m=$('#ovMeas');
+    if(P.length===2){
+      var pxcm=(H-MT-MB)/state.depth;
+      m.textContent='D '+(Math.hypot(P[1].x-P[0].x,P[1].y-P[0].y)/pxcm*10).toFixed(1)+' mm';
+    }else if(P.length===1){m.textContent='Place second point'}else{m.textContent=''}
+  }
+
+  function resize(){
+    var r=cv.getBoundingClientRect();
+    if(r.width<10)return;
+    W=r.width;H=r.height;dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    ar=(W-ML-MR)/(H-MT-MB);gh=Math.max(60,Math.round(gw/ar));
+    off.width=gw;off.height=gh;img=octx.createImageData(gw,gh);
+    genNoise();buildS();state.pts=[];readout();dirty=true;
+  }
+
+  function frame(ts){
+    if(!document.hidden&&img){
+      var need=dirty;dirty=false;
+      if(state.reveal<1){state.reveal=reduce?1:Math.min(1,(ts-rs)/650);need=true}
+      if(!state.frozen){
+        if(ts-last>70){state.phase+=Math.min(0.2,(ts-last)/1000*0.5);last=ts;need=true}
+      }else{last=ts}
+      if(need){renderBuf();draw()}
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function redraw(){buildS();readout();state.reveal=reduce?1:0;rs=performance.now();dirty=true}
+
+  function select(id){
+    var it=items.filter(function(x){return x.id===id})[0]||null;
+    state.page=it?it.id:null;state.probe=it?it.probe:'bigcurve';state.pts=[];
+    tiles.forEach(function(t){t.classList.toggle('is-sel',!!it&&t.dataset.id===it.id)});
+    $$('.probe').forEach(function(b){b.setAttribute('aria-current',String(!!it&&b.dataset.id===it.id))});
+    var P=PROBES[state.probe];
+    $('#exam').textContent=it?it.name:'Overview';
+    $('#ovName').textContent=it?it.name:'Overview';
+    $('#ovProbe').textContent=P.name+', '+P.code;
+    var o=$('#kOpen');
+    if(it){o.setAttribute('href',it.href);o.setAttribute('aria-disabled','false');$('#kOpenV').textContent=it.short+' →'}
+    else{o.removeAttribute('href');o.setAttribute('aria-disabled','true');$('#kOpenV').textContent='Select a probe'}
+    redraw();
+  }
+
+  /* controls */
+  function toggleFreeze(){
+    state.frozen=!state.frozen;
+    $('#kFreeze').setAttribute('aria-pressed',String(state.frozen));
+    readout();dirty=true;
+  }
+  function nextImage(){
+    var n;do{n=Math.floor(Math.random()*SC.length)}while(n===state.scene&&SC.length>1);
+    state.scene=n;state.pts=[];redraw();
+  }
+  function setDepth(d){state.depth=Math.max(4,Math.min(16,d));state.pts=[];buildS();readout();dirty=true}
+  $('#kFreeze').addEventListener('click',toggleFreeze);
+  $('#kImage').addEventListener('click',nextImage);
+  $('#kGain').addEventListener('input',function(e){state.gain=+e.target.value;readout();dirty=true});
+  $('#dMinus').addEventListener('click',function(){setDepth(state.depth-2)});
+  $('#dPlus').addEventListener('click',function(){setDepth(state.depth+2)});
+  $('#kClear').addEventListener('click',function(){state.pts=[];readout();dirty=true});
+  $('#kOpen').addEventListener('click',function(e){if(this.getAttribute('aria-disabled')==='true')e.preventDefault()});
+  cv.addEventListener('pointerdown',function(e){
+    var r=cv.getBoundingClientRect();
+    var x=Math.min(Math.max(e.clientX-r.left,ML),W-MR),y=Math.min(Math.max(e.clientY-r.top,MT),H-MB);
+    if(state.pts.length>=2)state.pts=[];
+    state.pts.push({x:x,y:y});readout();dirty=true;
+  });
+
+  /* tiles preview their probe on hover or keyboard focus, and navigate normally when clicked */
+  var hoverTimer=null;
+  tiles.forEach(function(t){
+    t.addEventListener('mouseenter',function(){clearTimeout(hoverTimer);hoverTimer=setTimeout(function(){if(state.page!==t.dataset.id)select(t.dataset.id)},140)});
+    t.addEventListener('mouseleave',function(){clearTimeout(hoverTimer)});
+    t.addEventListener('focus',function(){if(state.page!==t.dataset.id)select(t.dataset.id)});
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var t=e.target&&e.target.tagName;
+    if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;
+    var k=e.key;
+    if(k>='1'&&k<='5'&&items[+k-1]){select(items[+k-1].id)}
+    else if(k==='h'||k==='H'){select(null)}
+    else if(k==='f'||k==='F'){toggleFreeze()}
+    else if(k==='i'||k==='I'){nextImage()}
+    else if((k==='o'||k==='O')&&state.page){window.location.href=items.filter(function(x){return x.id===state.page})[0].href}
+  });
+
+  function clock(){
+    try{$('#clock').textContent=new Date().toLocaleString('en-AU',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false})}catch(e){}
+  }
+  clock();setInterval(clock,30000);
+
+  if(window.ResizeObserver){new ResizeObserver(function(){resize()}).observe($('#scan'))}
+  window.addEventListener('resize',resize);
+  if(state.frozen)$('#kFreeze').setAttribute('aria-pressed','true');
+  resize();
+  select(null);
+  requestAnimationFrame(frame);
+})();
+</script>
+<script data-goatcounter="https://tristanreddan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
