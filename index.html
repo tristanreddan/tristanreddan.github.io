@@ -227,6 +227,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div style="display:flex;align-items:center;gap:10px"><img class="jt-tree" src="assets/jacaranda-tree.png" alt="" width="58" height="46" style="flex:0 0 58px;display:block"><span>Tristan Reddan, Brisbane, Queensland</span></div>
 <div style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:24px;max-width:680px">I live and work on the lands of the Turrbal and Jagera peoples of Meanjin (Brisbane), and acknowledge their continuing custodianship of Country. I pay my respects to Elders past, present, and emerging, and recognise the deep connection of Aboriginal and Torres Strait Islander peoples to land, waters, and community across Queensland and beyond.</div>
 <div aria-hidden="true" style="margin-top:4px;line-height:0"><svg width="150" height="20" viewBox="0 0 150 20"><g fill="#B9A3DE"><ellipse cx="6" cy="12" rx="3.2" ry="1.7" transform="rotate(-20 6 12)"/><ellipse cx="30" cy="6" rx="2.8" ry="1.5" transform="rotate(25 30 6)"/><ellipse cx="52" cy="14" rx="3.2" ry="1.7" transform="rotate(10 52 14)"/><ellipse cx="81" cy="8" rx="2.6" ry="1.4" transform="rotate(-35 81 8)"/><ellipse cx="104" cy="15" rx="3" ry="1.6" transform="rotate(20 104 15)"/><ellipse cx="132" cy="9" rx="2.8" ry="1.5" transform="rotate(-10 132 9)"/></g></svg></div><span class="jt-petal" style="left:30px;--dx:18px;--r:150deg;animation-delay:-0.5s;animation-duration:8.0s"></span><span class="jt-petal" style="left:38px;--dx:-10px;--r:240deg;animation-delay:-2.4s;animation-duration:9.0s"></span><span class="jt-petal" style="left:44px;--dx:36px;--r:120deg;animation-delay:-4.4s;animation-duration:7.5s"></span><span class="jt-petal" style="left:34px;--dx:-26px;--r:300deg;animation-delay:-1.3s;animation-duration:9.5s"></span><span class="jt-petal" style="left:48px;--dx:22px;--r:200deg;animation-delay:-6.0s;animation-duration:8.5s"></span><span class="jt-petal" style="left:40px;--dx:50px;--r:180deg;animation-delay:-3.4s;animation-duration:10.0s"></span><span class="jt-petal" style="left:32px;--dx:8px;--r:260deg;animation-delay:-5.2s;animation-duration:7.0s"></span>
+<div id="last-updated-wrap" hidden style="font-size:14px;line-height:20px">
+  Site last updated <time id="last-updated"></time>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('last-updated'),wrap=document.getElementById('last-updated-wrap');
+  var d=new Date(document.lastModified);
+  if(!el||isNaN(d))return;
+  el.textContent=d.toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
+  el.setAttribute('datetime',d.toISOString().slice(0,10));
+  wrap.hidden=false;
+})();
+</script>
 </footer>
 
 </div>
